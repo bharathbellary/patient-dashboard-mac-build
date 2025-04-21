@@ -1,0 +1,15 @@
+directories:
+  output: dist
+  buildResources: assets
+files:
+  - filter:
+      - build/**/*
+      - build/**/*
+      - main.js
+extraMetadata:
+  main: build/electron.js
+appId: com.yourorg.patientdashboard
+mac:
+  target: dmg
+extends: react-cra
+electronVersion: 28.3.3
