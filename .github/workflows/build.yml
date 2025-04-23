@@ -28,7 +28,7 @@ jobs:
       - name: Build Electron app
         run: npm run dist
 
-      - name: Upload artifact
+      - name: Upload .dmg artifact
         uses: actions/upload-artifact@v3
         with:
           name: patient-dashboard-dmg
