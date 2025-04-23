@@ -1,20 +1,18 @@
+// electron.js
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
-function createWindow () {
+function createWindow() {
   const win = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: 1024,
+    height: 768,
     webPreferences: {
-      nodeIntegration: false
-    }
+      nodeIntegration: true,
+    },
   });
 
-  win.loadURL('http://localhost:3000');
+  // Load React build (after npm run build)
+  win.loadFile(path.join(__dirname, 'build', 'index.html'));
 }
 
-app.whenReady().then(() => {
-  const exec = require('child_process').exec;
-  exec('npm start'); // Start React app
-  setTimeout(createWindow, 5000); // Wait for React to start
-});
+app.whenReady().then(createWindow);
