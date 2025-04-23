@@ -29,7 +29,7 @@ jobs:
         run: npm run dist
 
       - name: Upload .dmg artifact
-        uses: actions/upload-artifact@v2  # v2 is stable
+        uses: actions/upload-artifact@v2.3.0  # Use a specific version
         with:
           name: patient-dashboard-dmg
           path: dist/*.dmg
