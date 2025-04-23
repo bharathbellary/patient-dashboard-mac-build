@@ -1,8 +1,8 @@
-name: Build App (macOS and Windows)
+name: Build macOS DMG
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -10,46 +10,22 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build for macOS
+      - name: Build React App and Package Electron App
         run: npm run dist
 
-      - name: Upload DMG file
-        uses: actions/upload-artifact@v2
+      - name: Upload DMG
+        uses: actions/upload-artifact@v3
         with:
-          name: macos-dmg
+          name: mac-installer
           path: dist/*.dmg
-
-  build-windows:
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build for Windows
-        run: npm run dist
-
-      - name: Upload EXE file
-        uses: actions/upload-artifact@v2
-        with:
-          name: windows-exe
-          path: dist/*.exe
